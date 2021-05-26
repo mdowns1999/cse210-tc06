@@ -36,8 +36,6 @@ root                    (project root folder)
 ---
 * # TODO: Add your names and emails here
 
-Mike Downs, downmich@byui.edu
-
-Joseph Blackford,
-
-Kendrick
+Kendrick Mausisa, kmausisa@byui.edu 
+Mike Downs, downmich@byui.edu 
+Joseph Blackford, bla12053@byui.edu
