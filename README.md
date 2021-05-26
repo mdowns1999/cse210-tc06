@@ -37,3 +37,7 @@ root                    (project root folder)
 * # TODO: Add your names and emails here
 
 Mike Downs, downmich@byui.edu
+
+Joseph Blackford,
+
+Kendrick
