@@ -15,7 +15,7 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        self._piles = []
+        self._number = 0
         self._prepare()
 
     def apply(self, move):
@@ -58,13 +58,12 @@ class Board:
         return text
 
     def _prepare(self):
-        """Sets up the board with a random number of piles containing a random 
-        number of stones.
+        """Sets up the board with a random number between 1000 and 9999
         
         Args:
             self (Board): an instance of Board.
         """
-        piles = random.randint(2, 5) 
-        for n in range(piles):
-            stones = random.randint(1, 9)
-            self._piles.append(stones)
+        self._number = random.randint(1000, 10000) 
+        # for n in range(piles):
+        #     stones = random.randint(1, 9)
+        #     self._piles.append(stones)
