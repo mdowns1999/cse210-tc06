@@ -15,8 +15,9 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        self._piles = []
-        self._prepare()
+        player = ''
+        self._items = {}
+        self._prepare(player)
 
     def apply(self, move):
         """Applies the given move to the playing surface. In this case, that 
@@ -52,27 +53,13 @@ class Board:
             string: A representation of the current board.
         """ 
         text =  "\n--------------------"
-        for pile, stones in enumerate(self._piles):
-            text += (f"\n{pile}: " + "O " * stones)
+        for key, value in self._items.items():
+            value = " , ".join(value)
+            print("Player {}: {}".format(key, value))
         text += "\n--------------------"
         return text
 
-    def _prepare(self):
-        """Sets up the board with a random number of piles containing a random 
-        number of stones.
-        
-        Args:
-            self (Board): an instance of Board.
-        """
-        piles = random.randint(2, 5) 
-        for n in range(piles):
-            stones = random.randint(1, 9)
-            self._piles.append(stones)
-
-
-
-    #CODE SNIPPTS DOWN BELOW
-    def prepare(self, player):
+    def _prepare(self, player):
         """Sets up the board with an entry for each player.
         
         Args:
@@ -83,6 +70,11 @@ class Board:
         guess = "----"
         hint = "****"
         self._items[name] = [code, guess, hint]
+
+
+
+    #CODE SNIPPTS DOWN BELOW
+    
         
     def _create_hint(self, code, guess):
         """Generates a hint based on the given code and guess.
