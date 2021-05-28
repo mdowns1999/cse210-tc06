@@ -42,7 +42,7 @@ class Board:
         empty = [0] * len(self._piles)
         return self._piles == empty
 
-    def to_string(self):
+    def to_string(self, roster):
         """Converts the board data to its string representation.
 
         Args:
@@ -52,8 +52,9 @@ class Board:
             string: A representation of the current board.
         """ 
         text =  "\n--------------------"
-        for pile, stones in enumerate(self._piles):
-            text += (f"\n{pile}: " + "O " * stones)
+        for player in roster.players:
+            player = roster.get_current()
+            text += (f"\n{player}: " + "----" )
         text += "\n--------------------"
         return text
 
