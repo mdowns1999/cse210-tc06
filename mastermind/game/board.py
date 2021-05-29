@@ -15,11 +15,16 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-        player = ''
         self._items = {}
-        self._prepare(player)
+        self._numbers = {}
+        self.guess = ""
+        self.code = ""
+        self.hint = ""
+        
+    # def split(self, variable):
+    #     return list(variable)
 
-    def apply(self, move):
+    def apply(self, player, move):
         """Applies the given move to the playing surface. In this case, that 
         means removing a number of stones from a pile.
         
@@ -27,9 +32,40 @@ class Board:
             self (Board): an instance of Board.
             move (Move): The move to apply.
         """
-        pile = move.get_pile()
-        stones = move.get_stones()
-        self._piles[pile] = max(0, self._piles[pile] - stones)
+        name = player.get_name()
+        player_input = list(move.get_guess())
+
+        guess = list(self._items[name][0])
+        code = list(self._numbers[name])
+        hint = list(self._items[name][1])
+
+        for i in range(0, 4):
+
+            if player_input[i] in code: 
+                # checking for equality of digits
+                if player_input[i] == code[i]:  
+
+                    # hence, the digit is stored in correct[].
+                    guess[i] = player_input[i]
+                    hint[i] = "x"
+
+                    print(f"You guessed the number {player_input[i]} in the right spot!")
+
+                else:
+                    hint[i] = "o"
+
+                    print(f"The number {player_input[i]} is correct, but its in a different spot!")
+
+
+        self.guess = "".join(guess)
+        self.code = "".join(code)
+        self.hint = "".join(hint)
+
+        self._items[name] = [self.guess, self.hint]
+
+        # pile = move.get_pile()
+        # stones = move.get_stones()
+        # self._piles[pile] = max(0, self._piles[pile] - stones)
     
     def is_empty(self):
         """Determines if all the stones have been removed from the board.
@@ -40,8 +76,12 @@ class Board:
         Returns:
             boolean: True if the board has no stones on it; false if otherwise.
         """
-        empty = [0] * len(self._piles)
-        return self._piles == empty
+        if self.guess == self.code:
+            return True
+        else:
+            return False
+        # empty = [0] * len(self._piles)
+        # return self._piles == empty
 
     def to_string(self):
         """Converts the board data to its string representation.
@@ -52,26 +92,28 @@ class Board:
         Returns:
             string: A representation of the current board.
         """ 
-        text =  "\n--------------------"
+
+        text =  "\n--------------------\n"
         for key, value in self._items.items():
             value = " , ".join(value)
-            print("Player {}: {}".format(key, value))
-        text += "\n--------------------"
+            text += "Player {}: {}\n".format(key, value)
+        text += "--------------------"
         return text
 
-    def _prepare(self, player):
+    def prepare(self, player):
         """Sets up the board with an entry for each player.
         
         Args:
             self (Board): an instance of Board.
         """
         name = player.get_name()
-        code = str(random.randint(1000, 10000))
-        guess = "----"
-        hint = "****"
-        self._items[name] = [code, guess, hint]
+        self.code = str(random.randint(1000, 10000))
+        self.guess = "----"
+        self.hint = "****"
+        self._numbers[name] = self.code
+        self._items[name] = [self.guess, self.hint]
 
-
+        
 
     #CODE SNIPPTS DOWN BELOW
     

@@ -49,10 +49,13 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        self._console.write("Welcome to the game Mastermind!\n")
         for n in range(2):
             name = self._console.read(f"Enter a name for player {n + 1}: ")
+            self._console.write(f"Welcome {name}!")
             player = Player(name)
             self._roster.add_player(player)
+            self._board.prepare(player)
     
     def _get_inputs(self):
         """Gets the inputs at the beginning of each round of play. In this case,
@@ -67,7 +70,7 @@ class Director:
         # get next player's move
         player = self._roster.get_current()
         self._console.write(f"{player.get_name()}'s turn:")
-        code_guess = self._console.read_number("What is your guess? ")
+        code_guess = self._console.read_string("What is your guess? ")
         #stones = self._console.read_number("How many stones to remove? ")
         move = Move(code_guess)
         player.set_move(move)
@@ -81,7 +84,7 @@ class Director:
         """
         player = self._roster.get_current()
         move = player.get_move()
-        self._board.apply(move)
+        self._board.apply(player, move)
  
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -96,6 +99,3 @@ class Director:
             print(f"\n{name} won!")
             self._keep_playing = False
         self._roster.next_player()
-
-     
-       
