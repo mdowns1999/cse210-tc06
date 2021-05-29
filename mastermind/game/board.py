@@ -15,7 +15,6 @@ class Board:
         Args:
             self (Board): an instance of Board.
         """
-
         self._items = {}
         self._numbers = {}
         self.guess = ""
@@ -93,6 +92,7 @@ class Board:
         Returns:
             string: A representation of the current board.
         """ 
+
         text =  "\n--------------------\n"
         for key, value in self._items.items():
             value = " , ".join(value)
@@ -112,6 +112,8 @@ class Board:
         self.hint = "****"
         self._numbers[name] = self.code
         self._items[name] = [self.guess, self.hint]
+
+        
 
     #CODE SNIPPTS DOWN BELOW
     
